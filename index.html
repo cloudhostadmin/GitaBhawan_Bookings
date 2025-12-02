@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>रूम बुकिंग - फॉर्म</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header {
+            background-color: #673ab7;
+            height: 10px;
+        }
+        .form-title {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .form-title h1 {
+            font-size: 32px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 8px;
+            line-height: 40px;
+        }
+        .form-title .subtitle {
+            font-size: 14px;
+            color: #202124;
+            line-height: 20px;
+            margin-bottom: 16px;
+        }
+        .instructions {
+            background-color: #f8f9fa;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+        .instructions ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .instructions li {
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 20px;
+            margin-bottom: 8px;
+        }
+        .required-note {
+            color: #d93025;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+        .form-content {
+            padding: 12px 24px 24px;
+        }
+        .form-section {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 24px 0;
+        }
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 32px;
+        }
+        .question:last-child {
+            margin-bottom: 0;
+        }
+        .question-label {
+            font-size: 14px;
+            color: #202124;
+            margin-bottom: 8px;
+            display: block;
+            line-height: 20px;
+        }
+        .required {
+            color: #d93025;
+            margin-left: 2px;
+            font-weight: 700;
+        }
+        .question-hint {
+            font-size: 12px;
+            color: #5f6368;
+            margin-top: 4px;
+            font-style: italic;
+        }
+        .prefilled-badge {
+            display: inline-block;
+            background-color: #e8f0fe;
+            color: #1967d2;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            font-weight: 500;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            max-width: 400px;
+            padding: 8px 0;
+            border: none;
+            border-bottom: 1px solid #dadce0;
+            font-size: 14px;
+            color: #202124;
+            font-family: inherit;
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-bottom: 2px solid #673ab7;
+        }
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 8px;
+        }
+        textarea:focus {
+            border: 2px solid #673ab7;
+        }
+        .radio-group {
+            margin-top: 12px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+        }
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #673ab7;
+        }
+        .radio-option label {
+            font-size: 14px;
+            color: #202124;
+            cursor: pointer;
+        }
+        .loading-indicator {
+            display: none;
+            font-size: 12px;
+            color: #673ab7;
+            margin-top: 4px;
+        }
+        .error-msg {
+            display: none;
+            font-size: 12px;
+            color: #d93025;
+            margin-top: 4px;
+        }
+        .success-msg {
+            display: none;
+            font-size: 12px;
+            color: #1e8e3e;
+            margin-top: 4px;
+        }
+        .readonly-field {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #dadce0 !important;
+        }
+        .submit-btn {
+            background-color: #673ab7;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 24px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover:not(:disabled) {
+            background-color: #5e35b1;
+            box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+        .submit-btn:active:not(:disabled) {
+            background-color: #512da8;
+        }
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .submission-status {
+            display: none;
+            padding: 16px;
+            margin: 20px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .submission-status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .submission-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .submission-status.loading {
+            background-color: #e8f0fe;
+            color: #1967d2;
+            border: 1px solid #d2e3fc;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #673ab7;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .footer {
+            text-align: center;
+            padding: 12px;
+            color: #5f6368;
+            font-size: 12px;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 24px;
+        }
+        .footer-text {
+            margin-bottom: 8px;
+        }
+        .google-forms-logo {
+            color: #5f6368;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+            .container {
+                border-radius: 0;
+            }
+            .form-title,
+            .form-content {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            input[type="text"],
+            input[type="tel"],
+            input[type="email"],
+            input[type="date"],
+            input[type="number"],
+            textarea {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header"></div>
+        
+        <div class="form-title">
+            <h1>रूम बुकिंग - फॉर्म</h1>
+            <div class="subtitle">गोविंद भवन कार्यालय (गीता भवन, ऋषिकेश)</div>
+            
+            <div class="instructions">
+                <ol>
+                    <li>कृपया बुकिंग प्रक्रिया को आगे बढ़ाने के लिए नीचे दिए गए प्रमुख व्यक्ति का विवरण साझा करें:-</li>
+                    <li>किसी भी जानकारी या सहायता के लिए संपर्क करें: +91-7456842900, +91-7456942900</li>
+                    <li>ईमेलआईडी :-roombooking@gitabhawan.in</li>
+                    <li>भवन नंबर 1 मुख्य कार्यालय समय प्रातः 8:30 से सायं 7:30 बजे तक,मध्याह्न भोजन विश्राम का समय: 12.30 से 2.00 बजे तक</li>
+                </ol>
+            </div>
+            
+            <div class="required-note">* Indicates required question</div>
+        </div>
+        <div id="submissionStatus" class="submission-status"></div>
+        <form id="bookingForm">
+            <div class="form-content">
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-name">1. नाम <span class="required">*</span></label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-whatsapp">2. व्हाट्सएप फ़ोन नंबर <span class="required">*</span></label>
+                        <input type="tel" name="whatsapp" id="whatsapp" required pattern="^\d{10}$" maxlength="10">
+                        <div class="question-hint">कृपया 10 अंकों का मोबाइल नंबर दर्ज करें</div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-bookingType">3. बुकिंग प्रकार</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="self" name="bookingType" value="self" onclick="handleBookingType('self')">
+                                <label for="self">स्वयं के लिये</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="others" name="bookingType" value="others" onclick="handleBookingType('others')">
+                                <label for="others">अन्य व्यक्ति के लिये</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-section" id="otherPersonSection" style="display: none;">
+                    <div class="section-title">अन्य मुख्य व्यक्ति का विवरण</div>
+                    <div class="question">
+                        <label class="question-label" id="label-otherName">4. नाम <span class="required">*</span></label>
+                        <input type="text" name="otherName" id="otherName">
+                    </div>
+                    <div class="question">
+                        <label class="question-label" id="label-otherContact">5. सम्पर्क नंबर (व्हाट्सएप) <span class="required">*</span></label>
+                        <input type="tel" name="otherContact" id="otherContact" pattern="^\d{10}$" maxlength="10">
+                        <div class="question-hint">कृपया 10 अंकों का मोबाइल नंबर दर्ज करें</div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-alternateContact">6. सम्पर्क के लिए अन्य आंतरिक (व्हाट्सएप) नंबर</label>
+                        <input type="tel" name="alternateContact" id="alternateContact" pattern="^\d{10}$" maxlength="10">
+                        <div class="question-hint">कृपया 10 अंकों का मोबाइल नंबर दर्ज करें</div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-address">7. पता <span class="required">*</span></label>
+                        <textarea name="address" id="address" required></textarea>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-pincode">8. पिनकोड <span class="required">*</span></label>
+                        <input type="text" name="pincode" id="pincode" required maxlength="6" pattern="[0-9]{6}" placeholder="6 अंकों का पिनकोड दर्ज करें">
+                        <div class="loading-indicator" id="pincodeLoading">🔄 स्थान विवरण प्राप्त कर रहे हैं...</div>
+                        <div class="error-msg" id="pincodeError">अमान्य पिनकोड या विवरण प्राप्त करने में असमर्थ</div>
+                        <div class="success-msg" id="pincodeSuccess">✓ स्थान विवरण लोड किया गया</div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-city">9. शहर <span class="required">*</span></label>
+                        <input type="text" name="city" id="city" required placeholder="शहर दर्ज करें">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-state">10. राज्य <span class="required">*</span></label>
+                        <input type="text" name="state" id="state" required placeholder="राज्य दर्ज करें">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-arrivalDate">11. आगमन तिथि <span class="required">*</span></label>
+                        <input type="date" name="arrivalDate" id="arrivalDate" required>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-departureDate">12. प्रस्थान तिथि <span class="required">*</span></label>
+                        <input type="date" name="departureDate" id="departureDate" required>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-males">13. पुरुष <span class="required">*</span></label>
+                        <input type="number" name="males" id="males" required min="0" value="0" oninput="calculateTotal()">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-females">14. महिला <span class="required">*</span></label>
+                        <input type="number" name="females" id="females" required min="0" value="0" oninput="calculateTotal()">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-children">15. बच्चे <span class="required">*</span></label>
+                        <input type="number" name="children" id="children" required min="0" value="0" oninput="calculateTotal()">
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-totalMembers">16. कुल सदस्यों की संख्या <span class="required">*</span></label>
+                        <input type="number" name="totalMembers" id="totalMembers" readonly class="readonly-field" value="0" required>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-aadhaar">17. आधार /आईडी नंबर <span class="required">*</span></label>
+                        <input type="text" name="aadhaar" id="aadhaar" required>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-totalRooms">18. कुल कमरों की आवश्यकता <span class="required">*</span></label>
+                        <input type="text" name="totalRooms" id="totalRooms" required>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-purpose">19. आने का उद्देश्य <span class="required">*</span></label>
+                        <input type="text" name="purpose" id="purpose" required>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-priorVisit">20. क्या आपने या आपके परिवार के किसी सदस्य ने पहले गीता भवन में रुखते किया है? (हाँ/नहीं) <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="visitYes" name="priorVisit" value="yes" required>
+                                <label for="visitYes">हाँ</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="visitNo" name="priorVisit" value="no" required>
+                                <label for="visitNo">नहीं</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+            </div>
+        </form>
+        <div class="footer">
+            <div class="footer-text">Gita Bhawan</div>
+            <div class="google-forms-logo">
+                <span style="font-weight: 400; color: #5f6368; margin-left: 4px;">Forms</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Google Apps Script Web App URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtzxOlyVtbRSE-uww-RVk7-av8h9X3yWx4DRtNSGb0JNmONqxGQbtbJx4QJZSl1K9d/exec';
+        
+        const fieldMapping = {
+            'name': 'name',
+            'whatsapp': 'whatsapp',
+            'phone': 'whatsapp',
+            'mobile': 'whatsapp',
+            'number': 'whatsapp',
+            'bookingType': 'bookingType',
+            'booking_type': 'bookingType',
+            'otherName': 'otherName',
+            'other_name': 'otherName',
+            'otherContact': 'otherContact',
+            'other_contact': 'otherContact',
+            'alternateContact': 'alternateContact',
+            'alternate_contact': 'alternateContact',
+            'address': 'address',
+            'pincode': 'pincode',
+            'pin': 'pincode',
+            'city': 'city',
+            'state': 'state',
+            'arrivalDate': 'arrivalDate',
+            'arrival_date': 'arrivalDate',
+            'arrival': 'arrivalDate',
+            'departureDate': 'departureDate',
+            'departure_date': 'departureDate',
+            'departure': 'departureDate',
+            'males': 'males',
+            'male': 'males',
+            'females': 'females',
+            'female': 'females',
+            'children': 'children',
+            'child': 'children',
+            'aadhaar': 'aadhaar',
+            'aadhar': 'aadhaar',
+            'id': 'aadhaar',
+            'totalRooms': 'totalRooms',
+            'total_rooms': 'totalRooms',
+            'rooms': 'totalRooms',
+            'purpose': 'purpose',
+            'priorVisit': 'priorVisit',
+            'prior_visit': 'priorVisit',
+            'previous_visit': 'priorVisit'
+        };
+
+        function generateBookingId() {
+            const timestamp = Date.now();
+            const random = Math.floor(Math.random() * 1000);
+            return `BK${timestamp}${random}`;
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('submissionStatus');
+            statusDiv.style.display = 'block';
+            statusDiv.className = `submission-status ${type}`;
+            
+            if (type === 'loading') {
+                statusDiv.innerHTML = `<div class="spinner"></div><span>${message}</span>`;
+            } else {
+                statusDiv.textContent = message;
+            }
+            
+            statusDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            if (type === 'success' || type === 'error') {
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        function addPrefilledBadge(fieldId) {
+            const label = document.getElementById(`label-${fieldId}`);
+            if (label && !label.querySelector('.prefilled-badge')) {
+                const badge = document.createElement('span');
+                badge.className = 'prefilled-badge';
+                badge.textContent = 'Pre-filled';
+                label.appendChild(badge);
+            }
+        }
+
+        function autoFillFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let prefilledCount = 0;
+            
+            urlParams.forEach((value, key) => {
+                const fieldId = fieldMapping[key.toLowerCase()];
+                
+                if (fieldId) {
+                    const field = document.getElementById(fieldId);
+                    
+                    if (field) {
+                        if (field.type === 'radio') {
+                            const radioBtn = document.querySelector(`input[name="${fieldId}"][value="${value.toLowerCase()}"]`);
+                            if (radioBtn) {
+                                radioBtn.checked = true;
+                                if (fieldId === 'bookingType') {
+                                    handleBookingType(value.toLowerCase());
+                                }
+                                addPrefilledBadge(fieldId);
+                                prefilledCount++;
+                            }
+                        } else {
+                            field.value = value;
+                            addPrefilledBadge(fieldId);
+                            prefilledCount++;
+                            
+                            if (fieldId === 'pincode' && value.length === 6) {
+                                fetchPincodeDetails(value);
+                            }
+                        }
+                    }
+                }
+            });
+            
+            calculateTotal();
+            
+            if (prefilledCount > 0) {
+                console.log(`${prefilledCount} fields pre-filled from URL`);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            autoFillFromURL();
+            
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('arrivalDate').min = today;
+            document.getElementById('departureDate').min = today;
+        });
+
+        function calculateTotal() {
+            const males = parseInt(document.getElementById('males').value) || 0;
+            const females = parseInt(document.getElementById('females').value) || 0;
+            const children = parseInt(document.getElementById('children').value) || 0;
+            
+            const total = males + females + children;
+            document.getElementById('totalMembers').value = total;
+        }
+
+        function handleBookingType(type) {
+            const otherPersonSection = document.getElementById('otherPersonSection');
+            const otherName = document.getElementById('otherName');
+            const otherContact = document.getElementById('otherContact');
+            
+            if (type === 'others') {
+                otherPersonSection.style.display = 'block';
+                otherName.required = true;
+                otherContact.required = true;
+                setTimeout(() => {
+                    otherPersonSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                otherPersonSection.style.display = 'none';
+                otherName.required = false;
+                otherContact.required = false;
+                otherName.value = '';
+                otherContact.value = '';
+            }
+        }
+
+        const pincodeInput = document.getElementById('pincode');
+        const cityInput = document.getElementById('city');
+        const stateInput = document.getElementById('state');
+        const loadingMsg = document.getElementById('pincodeLoading');
+        const errorMsg = document.getElementById('pincodeError');
+        const successMsg = document.getElementById('pincodeSuccess');
+        let debounceTimer;
+
+        pincodeInput.addEventListener('input', function() {
+            const pincode = this.value.trim();
+            
+            loadingMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+            cityInput.value = '';
+            stateInput.value = '';
+            
+            clearTimeout(debounceTimer);
+            
+            if (pincode.length === 6 && /^\d{6}$/.test(pincode)) {
+                loadingMsg.style.display = 'block';
+                debounceTimer = setTimeout(() => {
+                    fetchPincodeDetails(pincode);
+                }, 500);
+            }
+        });
+
+        async function fetchPincodeDetails(pincode) {
+            try {
+                const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+                
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                
+                const data = await response.json();
+                loadingMsg.style.display = 'none';
+                
+                if (data && data[0] && data[0].Status === 'Success' && data[0].PostOffice && data[0].PostOffice.length > 0) {
+                    const postOffice = data[0].PostOffice[0];
+                    
+                    cityInput.value = postOffice.District || postOffice.Block || '';
+                    stateInput.value = postOffice.State || '';
+                    successMsg.style.display = 'block';
+                    
+                    setTimeout(() => {
+                        successMsg.style.display = 'none';
+                    }, 3000);
+                } else {
+                    errorMsg.textContent = 'पिनकोड नहीं मिला। कृपया शहर और राज्य मैन्युअल रूप से दर्ज करें';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error fetching pincode details:', error);
+                loadingMsg.style.display = 'none';
+                
+                errorMsg.textContent = 'कृपया शहर और राज्य मैन्युअल रूप से दर्ज करें';
+                errorMsg.style.display = 'block';
+                
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        document.getElementById('arrivalDate').addEventListener('change', function() {
+            document.getElementById('departureDate').min = this.value;
+        });
+
+     document.getElementById('departureDate').addEventListener('change', function() {
+            const arrivalDate = document.getElementById('arrivalDate').value;
+            const departureDate = this.value;
+            
+            if (arrivalDate && departureDate && new Date(departureDate) <= new Date(arrivalDate)) {
+                alert('प्रस्थान तिथि आगमन तिथि के बाद होनी चाहिए / Departure date must be after arrival date');
+                this.value = '';
+            }
+        });
+
+        // ⬇️⬇️⬇️ PASTE THE FORM SUBMISSION HANDLER HERE ⬇️⬇️⬇️
+        
+        // FORM SUBMISSION HANDLER
+             // FORM SUBMISSION HANDLER
+      // FORM SUBMISSION HANDLER
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    showStatus('⏳ फॉर्म सबमिट किया जा रहा है... / Submitting form...', 'loading');
+    document.getElementById('submitBtn').disabled = true;
+    
+    const formData = new FormData(this);
+    const bookingDate = new Date().toLocaleDateString('en-IN');
+    const timestamp = new Date().toISOString();
+    
+    // Generate a temporary booking ID for display
+    const tempBookingId = 'GBW/' + new Date().getFullYear() + '/' + String(Date.now()).slice(-4);
+    
+    const data = {
+        bookingId: '', // Will be generated by Google Apps Script
+        bookingDate: bookingDate,
+        name: formData.get('name'),
+        whatsapp: formData.get('whatsapp'),
+        bookingType: formData.get('bookingType') || '',
+        otherName: formData.get('otherName') || '',
+        otherContact: formData.get('otherContact') || '',
+        alternateContact: formData.get('alternateContact') || '',
+        address: formData.get('address'),
+        pincode: formData.get('pincode'),
+        city: formData.get('city'),
+        state: formData.get('state'),
+        arrivalDate: formData.get('arrivalDate'),
+        departureDate: formData.get('departureDate'),
+        males: formData.get('males') || '0',
+        females: formData.get('females') || '0',
+        children: formData.get('children') || '0',
+        totalMembers: formData.get('totalMembers'),
+        aadhaar: formData.get('aadhaar'),
+        totalRooms: formData.get('totalRooms'),
+        purpose: formData.get('purpose'),
+        priorVisit: formData.get('priorVisit'),
+        timestamp: timestamp
+    };
+
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',  // ← THIS IS THE KEY CHANGE
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        // With no-cors mode, we can't read the response
+        // We assume success if no error is thrown
+        showStatus(`✅ फॉर्म सफलतापूर्वक सबमिट किया गया! / Form submitted successfully!`, 'success');
+        
+        // Reset form
+        document.getElementById('bookingForm').reset();
+        document.getElementById('otherPersonSection').style.display = 'none';
+        document.getElementById('totalMembers').value = '0';
+        
+        document.getElementById('submitBtn').disabled = false;
+        
+    } catch (error) {
+        showStatus(`❌ फॉर्म सबमिट करने में विफल / Form submission failed: ${error.message}. कृपया पुनः प्रयास करें / Please try again.`, 'error');
+        document.getElementById('submitBtn').disabled = false;
+        console.error('Submission error:', error);
+    }
+});
+    </script>
+</body>
+</html>
