@@ -331,7 +331,14 @@
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-bookingType">3. बुकिंग प्रकार</label>
+                        <label class="question-label" id="label-email">3. ईमेल आईडी</label>
+                        <input type="email" name="email" id="email">
+                        <div class="question-hint">कृपया अपना ईमेल पता दर्ज करें</div>
+                    </div>
+                </div>
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-bookingType">4. बुकिंग प्रकार</label>
                         <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="self" name="bookingType" value="self" onclick="handleBookingType('self')">
@@ -347,31 +354,31 @@
                 <div class="form-section" id="otherPersonSection" style="display: none;">
                     <div class="section-title">अन्य मुख्य व्यक्ति का विवरण</div>
                     <div class="question">
-                        <label class="question-label" id="label-otherName">4. नाम <span class="required">*</span></label>
+                        <label class="question-label" id="label-otherName">5. नाम <span class="required">*</span></label>
                         <input type="text" name="otherName" id="otherName">
                     </div>
                     <div class="question">
-                        <label class="question-label" id="label-otherContact">5. सम्पर्क नंबर (व्हाट्सएप) <span class="required">*</span></label>
+                        <label class="question-label" id="label-otherContact">6. सम्पर्क नंबर (व्हाट्सएप) <span class="required">*</span></label>
                         <input type="tel" name="otherContact" id="otherContact" pattern="^\d{10}$" maxlength="10">
                         <div class="question-hint">कृपया 10 अंकों का मोबाइल नंबर दर्ज करें</div>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-alternateContact">6. सम्पर्क के लिए अन्य आंतरिक (व्हाट्सएप) नंबर</label>
+                        <label class="question-label" id="label-alternateContact">7. सम्पर्क के लिए अन्य आंतरिक (व्हाट्सएप) नंबर</label>
                         <input type="tel" name="alternateContact" id="alternateContact" pattern="^\d{10}$" maxlength="10">
                         <div class="question-hint">कृपया 10 अंकों का मोबाइल नंबर दर्ज करें</div>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-address">7. पता <span class="required">*</span></label>
+                        <label class="question-label" id="label-address">8. पता <span class="required">*</span></label>
                         <textarea name="address" id="address" required></textarea>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-pincode">8. पिनकोड <span class="required">*</span></label>
+                        <label class="question-label" id="label-pincode">9. पिनकोड <span class="required">*</span></label>
                         <input type="text" name="pincode" id="pincode" required maxlength="6" pattern="[0-9]{6}" placeholder="6 अंकों का पिनकोड दर्ज करें">
                         <div class="loading-indicator" id="pincodeLoading">🔄 स्थान विवरण प्राप्त कर रहे हैं...</div>
                         <div class="error-msg" id="pincodeError">अमान्य पिनकोड या विवरण प्राप्त करने में असमर्थ</div>
@@ -380,73 +387,73 @@
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-city">9. शहर <span class="required">*</span></label>
+                        <label class="question-label" id="label-city">10. शहर <span class="required">*</span></label>
                         <input type="text" name="city" id="city" required placeholder="शहर दर्ज करें">
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-state">10. राज्य <span class="required">*</span></label>
+                        <label class="question-label" id="label-state">11. राज्य <span class="required">*</span></label>
                         <input type="text" name="state" id="state" required placeholder="राज्य दर्ज करें">
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-arrivalDate">11. आगमन तिथि <span class="required">*</span></label>
+                        <label class="question-label" id="label-arrivalDate">12. आगमन तिथि <span class="required">*</span></label>
                         <input type="date" name="arrivalDate" id="arrivalDate" required>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-departureDate">12. प्रस्थान तिथि <span class="required">*</span></label>
+                        <label class="question-label" id="label-departureDate">13. प्रस्थान तिथि <span class="required">*</span></label>
                         <input type="date" name="departureDate" id="departureDate" required>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-males">13. पुरुष <span class="required">*</span></label>
+                        <label class="question-label" id="label-males">14. पुरुष <span class="required">*</span></label>
                         <input type="number" name="males" id="males" required min="0" value="0" oninput="calculateTotal()">
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-females">14. महिला <span class="required">*</span></label>
+                        <label class="question-label" id="label-females">15. महिला <span class="required">*</span></label>
                         <input type="number" name="females" id="females" required min="0" value="0" oninput="calculateTotal()">
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-children">15. बच्चे <span class="required">*</span></label>
+                        <label class="question-label" id="label-children">16. बच्चे <span class="required">*</span></label>
                         <input type="number" name="children" id="children" required min="0" value="0" oninput="calculateTotal()">
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-totalMembers">16. कुल सदस्यों की संख्या <span class="required">*</span></label>
+                        <label class="question-label" id="label-totalMembers">17. कुल सदस्यों की संख्या <span class="required">*</span></label>
                         <input type="number" name="totalMembers" id="totalMembers" readonly class="readonly-field" value="0" required>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-aadhaar">17. आधार /आईडी नंबर <span class="required">*</span></label>
+                        <label class="question-label" id="label-aadhaar">18. आधार /आईडी नंबर <span class="required">*</span></label>
                         <input type="text" name="aadhaar" id="aadhaar" required>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-totalRooms">18. कुल कमरों की आवश्यकता <span class="required">*</span></label>
+                        <label class="question-label" id="label-totalRooms">19. कुल कमरों की आवश्यकता <span class="required">*</span></label>
                         <input type="text" name="totalRooms" id="totalRooms" required>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-purpose">19. आने का उद्देश्य <span class="required">*</span></label>
+                        <label class="question-label" id="label-purpose">20. आने का उद्देश्य <span class="required">*</span></label>
                         <input type="text" name="purpose" id="purpose" required>
                     </div>
                 </div>
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-priorVisit">20. क्या आपने या आपके परिवार के किसी सदस्य ने पहले गीता भवन में रुखते किया है? (हाँ/नहीं) <span class="required">*</span></label>
+                        <label class="question-label" id="label-priorVisit">21. क्या आपने या आपके परिवार के किसी सदस्य ने पहले गीता भवन में रुखते किया है? (हाँ/नहीं) <span class="required">*</span></label>
                         <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="visitYes" name="priorVisit" value="yes" required>
@@ -470,12 +477,12 @@
         </div>
     </div>
     <script>
-        // Google Apps Script Web App URL
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyzYiAItNCKluV6bHTzrdVUDJgT3_GYcj_tZiw44P1j54MzYk7BOkpIrrMoU3HLlXz_5Q/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV6ReU8_M5TflsbWJUu7v4M0mpJAotRqRPJuLFaxqWK8L4vYMH9QqJhpGwtuN5xp_F/exec';
         
         const fieldMapping = {
             'name': 'name',
             'whatsapp': 'whatsapp',
+            'email': 'email',
             'phone': 'whatsapp',
             'mobile': 'whatsapp',
             'number': 'whatsapp',
@@ -515,13 +522,7 @@
             'prior_visit': 'priorVisit',
             'previous_visit': 'priorVisit'
         };
-
-        function generateBookingId() {
-            const timestamp = Date.now();
-            const random = Math.floor(Math.random() * 1000);
-            return `BK${timestamp}${random}`;
-        }
-
+        
         function showStatus(message, type) {
             const statusDiv = document.getElementById('submissionStatus');
             statusDiv.style.display = 'block';
@@ -541,7 +542,7 @@
                 }, 5000);
             }
         }
-
+        
         function addPrefilledBadge(fieldId) {
             const label = document.getElementById(`label-${fieldId}`);
             if (label && !label.querySelector('.prefilled-badge')) {
@@ -551,7 +552,7 @@
                 label.appendChild(badge);
             }
         }
-
+        
         function autoFillFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             let prefilledCount = 0;
@@ -592,7 +593,7 @@
                 console.log(`${prefilledCount} fields pre-filled from URL`);
             }
         }
-
+        
         window.addEventListener('DOMContentLoaded', function() {
             autoFillFromURL();
             
@@ -600,7 +601,7 @@
             document.getElementById('arrivalDate').min = today;
             document.getElementById('departureDate').min = today;
         });
-
+        
         function calculateTotal() {
             const males = parseInt(document.getElementById('males').value) || 0;
             const females = parseInt(document.getElementById('females').value) || 0;
@@ -609,7 +610,7 @@
             const total = males + females + children;
             document.getElementById('totalMembers').value = total;
         }
-
+        
         function handleBookingType(type) {
             const otherPersonSection = document.getElementById('otherPersonSection');
             const otherName = document.getElementById('otherName');
@@ -630,7 +631,7 @@
                 otherContact.value = '';
             }
         }
-
+        
         const pincodeInput = document.getElementById('pincode');
         const cityInput = document.getElementById('city');
         const stateInput = document.getElementById('state');
@@ -638,7 +639,7 @@
         const errorMsg = document.getElementById('pincodeError');
         const successMsg = document.getElementById('pincodeSuccess');
         let debounceTimer;
-
+        
         pincodeInput.addEventListener('input', function() {
             const pincode = this.value.trim();
             
@@ -657,7 +658,7 @@
                 }, 500);
             }
         });
-
+        
         async function fetchPincodeDetails(pincode) {
             try {
                 const response = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
@@ -695,12 +696,12 @@
                 }, 5000);
             }
         }
-
+        
         document.getElementById('arrivalDate').addEventListener('change', function() {
             document.getElementById('departureDate').min = this.value;
         });
-
-     document.getElementById('departureDate').addEventListener('change', function() {
+        
+        document.getElementById('departureDate').addEventListener('change', function() {
             const arrivalDate = document.getElementById('arrivalDate').value;
             const departureDate = this.value;
             
@@ -710,81 +711,77 @@
             }
         });
         
-        // FORM SUBMISSION HANDLER
-// FORM SUBMISSION HANDLER
-document.getElementById('bookingForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    showStatus('⏳ फॉर्म सबमिट किया जा रहा है... / Submitting form...', 'loading');
-    document.getElementById('submitBtn').disabled = true;
-    
-    const formData = new FormData(this);
-    const bookingDate = new Date().toLocaleDateString('en-IN');
-    const timestamp = new Date().toISOString();
-    
-    // Function to format date as "4-Jul-2025"
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        const day = date.getDate();
-        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        const month = monthNames[date.getMonth()];
-        const year = date.getFullYear();
-        return `${day}-${month}-${year}`;
-    }
-    
-    const data = {
-        bookingId: '', // Will be generated by Google Apps Script
-        bookingDate: bookingDate,
-        name: formData.get('name'),
-        whatsapp: formData.get('whatsapp'),
-        bookingType: formData.get('bookingType') || '',
-        otherName: formData.get('otherName') || '',
-        otherContact: formData.get('otherContact') || '',
-        alternateContact: formData.get('alternateContact') || '',
-        address: formData.get('address'),
-        pincode: formData.get('pincode'),
-        city: formData.get('city'),
-        state: formData.get('state'),
-        arrivalDate: formatDate(formData.get('arrivalDate')),
-        departureDate: formatDate(formData.get('departureDate')),
-        males: formData.get('males') || '0',
-        females: formData.get('females') || '0',
-        children: formData.get('children') || '0',
-        totalMembers: formData.get('totalMembers'),
-        aadhaar: formData.get('aadhaar'),
-        totalRooms: formData.get('totalRooms'),
-        purpose: formData.get('purpose'),
-        priorVisit: formData.get('priorVisit'),
-        timestamp: timestamp
-    };
-    
-    try {
-        const response = await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            showStatus('⏳ फॉर्म सबमिट किया जा रहा है... / Submitting form...', 'loading');
+            document.getElementById('submitBtn').disabled = true;
+            
+            const formData = new FormData(this);
+            const bookingDate = new Date().toLocaleDateString('en-IN');
+            const timestamp = new Date().toISOString();
+            
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const day = date.getDate();
+                const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const month = monthNames[date.getMonth()];
+                const year = date.getFullYear();
+                return `${day}-${month}-${year}`;
+            }
+            
+            const data = {
+                bookingId: '',
+                bookingDate: bookingDate,
+                name: formData.get('name'),
+                whatsapp: formData.get('whatsapp'),
+                email: formData.get('email') || '',
+                bookingType: formData.get('bookingType') || '',
+                otherName: formData.get('otherName') || '',
+                otherContact: formData.get('otherContact') || '',
+                alternateContact: formData.get('alternateContact') || '',
+                address: formData.get('address'),
+                pincode: formData.get('pincode'),
+                city: formData.get('city'),
+                state: formData.get('state'),
+                arrivalDate: formatDate(formData.get('arrivalDate')),
+                departureDate: formatDate(formData.get('departureDate')),
+                males: formData.get('males') || '0',
+                females: formData.get('females') || '0',
+                children: formData.get('children') || '0',
+                totalMembers: formData.get('totalMembers'),
+                aadhaar: formData.get('aadhaar'),
+                totalRooms: formData.get('totalRooms'),
+                purpose: formData.get('purpose'),
+                priorVisit: formData.get('priorVisit'),
+                timestamp: timestamp
+            };
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                showStatus(`✅ फॉर्म सफलतापूर्वक सबमिट किया गया! / Form submitted successfully!`, 'success');
+                
+                document.getElementById('bookingForm').reset();
+                document.getElementById('otherPersonSection').style.display = 'none';
+                document.getElementById('totalMembers').value = '0';
+                
+                document.getElementById('submitBtn').disabled = false;
+                
+            } catch (error) {
+                showStatus(`❌ फॉर्म सबमिट करने में विफल / Form submission failed: ${error.message}. कृपया पुनः प्रयास करें / Please try again.`, 'error');
+                document.getElementById('submitBtn').disabled = false;
+                console.error('Submission error:', error);
+            }
         });
-        
-        showStatus(`✅ फॉर्म सफलतापूर्वक सबमिट किया गया! / Form submitted successfully!`, 'success');
-        
-        // Reset form
-        document.getElementById('bookingForm').reset();
-        document.getElementById('otherPersonSection').style.display = 'none';
-        document.getElementById('totalMembers').value = '0';
-        
-        document.getElementById('submitBtn').disabled = false;
-        
-    } catch (error) {
-        showStatus(`❌ फॉर्म सबमिट करने में विफल / Form submission failed: ${error.message}. कृपया पुनः प्रयास करें / Please try again.`, 'error');
-        document.getElementById('submitBtn').disabled = false;
-        console.error('Submission error:', error);
-    }
-});
     </script>
 </body>
 </html>
-
