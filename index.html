@@ -241,18 +241,27 @@
                     </div>
                 </div>
 
-                <!-- 19. कुल कमरे -->
+                <!-- 19. व्यवसाय -->
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-totalRooms">19. कुल कमरों की आवश्यकता <span class="required">*</span></label>
+                        <label class="question-label" id="label-occupation">19. व्यवसाय</label>
+                        <input type="text" name="occupation" id="occupation" placeholder="अपना व्यवसाय दर्ज करें">
+                        <div class="question-hint">जैसे: किसान, व्यापारी, सरकारी कर्मचारी, गृहिणी आदि</div>
+                    </div>
+                </div>
+
+                <!-- 20. कुल कमरे -->
+                <div class="form-section">
+                    <div class="question">
+                        <label class="question-label" id="label-totalRooms">20. कुल कमरों की आवश्यकता <span class="required">*</span></label>
                         <input type="text" name="totalRooms" id="totalRooms" required>
                     </div>
                 </div>
 
-                <!-- 20. वरिष्ठ सदस्य की उम्र -->
+                <!-- 21. वरिष्ठ सदस्य की उम्र -->
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-seniorAge">20. अपने परिवार के वरिष्ठ सदस्य की उम्र दर्ज करे</label>
+                        <label class="question-label" id="label-seniorAge">21. अपने परिवार के वरिष्ठ सदस्य की उम्र दर्ज करे</label>
                         <input type="number" name="seniorAge" id="seniorAge" min="1" max="120" placeholder="उम्र दर्ज करें">
                         <div class="question-hint">कृपया वरिष्ठतम सदस्य की आयु अंकों में दर्ज करें</div>
                     </div>
@@ -261,15 +270,15 @@
                 <!-- 22. आने का उद्देश्य -->
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-purpose">21. आने का उद्देश्य <span class="required">*</span></label>
+                        <label class="question-label" id="label-purpose">22. आने का उद्देश्य <span class="required">*</span></label>
                         <input type="text" name="purpose" id="purpose" required>
                     </div>
                 </div>
 
-                <!-- 23. पूर्व भ्रमण — RENAMED -->
+                <!-- 23. पूर्व भ्रमण -->
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-priorVisit">22. क्या आप या आपके परिवार का कोई सदस्य पहले गीताभवन मे रुका है ? <span class="required">*</span></label>
+                        <label class="question-label" id="label-priorVisit">23. क्या आप या आपके परिवार का कोई सदस्य पहले गीताभवन मे रुका है ? <span class="required">*</span></label>
                         <div class="radio-group">
                             <div class="radio-option">
                                 <input type="radio" id="visitYes" name="priorVisit" value="yes" onclick="handlePriorVisit('yes')" required>
@@ -307,10 +316,10 @@
     </div>
 
     <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwoHNKO9Y3wxsJNaKac61g_pYcv5ITsYWBaAQpPvBjtGZH5tQZFXR9q2G1esCtpGYmQ/exec';
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxTLuRiXxqRMmaKG2g-9rxnoabtB8TbJD2MBue56tiWmGQuKze47Lq7YFBPCT18H6JPxg/exec';
 
         const fieldMapping = {
-            'name': 'name', 'whatsapp': 'whatsapp', 'email': 'email',
+            'name': 'name', 'whatsapp': 'whatsapp', 'email': 'email', 'occupation': 'occupation',
             'phone': 'whatsapp', 'mobile': 'whatsapp', 'number': 'whatsapp',
             'bookingType': 'bookingType', 'booking_type': 'bookingType',
             'otherName': 'otherName', 'other_name': 'otherName',
@@ -370,11 +379,15 @@
             }
         }
 
+        // Fields that should NEVER be autofilled from URL (to prevent misuse of shared links)
+        const BLOCKED_AUTOFILL_FIELDS = ['whatsapp'];
+
         function autoFillFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             let prefilledCount = 0;
             urlParams.forEach((value, key) => {
                 const fieldId = fieldMapping[key.toLowerCase()];
+                if (BLOCKED_AUTOFILL_FIELDS.includes(fieldId)) return;
                 if (fieldId) {
                     const field = document.getElementById(fieldId);
                     if (field) {
@@ -480,14 +493,22 @@
         }
 
         document.getElementById('arrivalDate').addEventListener('change', function() {
-            document.getElementById('departureDate').min = this.value;
+            const arrivalVal     = this.value;
+            const departureField = document.getElementById('departureDate');
+            // Departure must be at least the same day as arrival
+            departureField.min = arrivalVal;
+            // If a departure date was already chosen and is now before the new arrival, clear it
+            if (departureField.value && departureField.value < arrivalVal) {
+                departureField.value = '';
+            }
         });
 
         document.getElementById('departureDate').addEventListener('change', function() {
             const arrivalDate   = document.getElementById('arrivalDate').value;
             const departureDate = this.value;
-            if (arrivalDate && departureDate && new Date(departureDate) <= new Date(arrivalDate)) {
-                alert('प्रस्थान तिथि आगमन तिथि के बाद होनी चाहिए / Departure date must be after arrival date');
+            // Only invalid if departure is strictly BEFORE arrival (same day is allowed)
+            if (arrivalDate && departureDate && departureDate < arrivalDate) {
+                alert('प्रस्थान तिथि आगमन तिथि से पहले नहीं होनी चाहिए / Departure date cannot be before arrival date');
                 this.value = '';
             }
         });
@@ -514,6 +535,7 @@
                 name:             formData.get('name'),
                 whatsapp:         formData.get('whatsapp'),
                 email:            formData.get('email') || '',
+                occupation:       formData.get('occupation') || '',
                 bookingType:      formData.get('bookingType') || '',
                 otherName:        formData.get('otherName') || '',
                 otherContact:     formData.get('otherContact') || '',
