@@ -113,14 +113,14 @@
                 <!-- 4. बुकिंग प्रकार -->
                 <div class="form-section">
                     <div class="question">
-                        <label class="question-label" id="label-bookingType">4. बुकिंग प्रकार</label>
+                        <label class="question-label" id="label-bookingType">4. बुकिंग प्रकार <span class="required">*</span></label>
                         <div class="radio-group">
                             <div class="radio-option">
-                                <input type="radio" id="self" name="bookingType" value="self" onclick="handleBookingType('self')">
+                                <input type="radio" id="self" name="bookingType" value="self" onclick="handleBookingType('self')" required>
                                 <label for="self">स्वयं के लिये</label>
                             </div>
                             <div class="radio-option">
-                                <input type="radio" id="others" name="bookingType" value="others" onclick="handleBookingType('others')">
+                                <input type="radio" id="others" name="bookingType" value="others" onclick="handleBookingType('others')" required>
                                 <label for="others">अन्य व्यक्ति के लिये</label>
                             </div>
                         </div>
