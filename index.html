@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>रूम बुकिंग - फॉर्म</title>
+    <script>
+        // Redirect old GitHub Pages visitors to the new domain.
+        // Only fires on the github.io hostname, so it does NOT loop when
+        // Cloudflare's Worker fetches this same file to serve on gitabhawan.org.
+        if (window.location.hostname.endsWith('github.io')) {
+            window.location.replace('https://gitabhawan.org/roombooking-form' + window.location.search);
+        }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Roboto', Arial, sans-serif; background-color: #f5f5f5; padding: 20px; }
