@@ -529,6 +529,7 @@
             e.preventDefault();
             showStatus('⏳ फॉर्म सबमिट किया जा रहा है... / Submitting form...', 'loading');
             document.getElementById('submitBtn').disabled = true;
+            document.getElementById('submitBtn').textContent = 'Submitting...';
 
             const formData    = new FormData(this);
             const bookingDate = new Date().toLocaleDateString('en-IN');
@@ -575,7 +576,8 @@
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    keepalive: true,
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify(data)
                 });
                 showStatus('✅ फॉर्म सफलतापूर्वक सबमिट किया गया! / Form submitted successfully!', 'success');
@@ -584,9 +586,11 @@
                 document.getElementById('preferredRoomSection').style.display = 'none';
                 document.getElementById('totalMembers').value = '0';
                 document.getElementById('submitBtn').disabled = false;
+                document.getElementById('submitBtn').textContent = 'Submit';
             } catch (error) {
                 showStatus(`❌ फॉर्म सबमिट करने में विफल / Form submission failed: ${error.message}. कृपया पुनः प्रयास करें / Please try again.`, 'error');
                 document.getElementById('submitBtn').disabled = false;
+                document.getElementById('submitBtn').textContent = 'Submit';
                 console.error('Submission error:', error);
             }
         });
